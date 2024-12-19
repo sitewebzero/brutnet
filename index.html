@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simulateur Salaire Brut/Net</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+<header>
+  <h1>Simulateur Brut &rarr; Net</h1>
+</header>
+
+<main>
+  <section class="intro">
+    <p>Entrez votre salaire brut mensuel pour obtenir une estimation de votre salaire net.
+      (Ce calcul est approximatif et ne reflète pas nécessairement les cotisations réelles.)</p>
+  </section>
+
+  <section class="simulator">
+    <div class="form-group">
+      <label for="salaireBrut">Salaire Brut (en €) :</label>
+      <input type="number" id="salaireBrut" placeholder="Ex: 3000" min="0" step="0.01">
+    </div>
+    <button id="calculerBtn">Calculer</button>
+
+    <div class="result">
+      <p>Salaire Net estimé : <span id="salaireNet">-</span> €</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2024 Mon Simulateur. Projet démo.</p>
+</footer>
+
+<script>
+  // Sélection des éléments
+  const salaireBrutInput = document.getElementById('salaireBrut');
+  const calculerBtn = document.getElementById('calculerBtn');
+  const salaireNetDisplay = document.getElementById('salaireNet');
+
+  // Fonction de calcul (approximatif)
+  function calculerSalaireNet(brut) {
+    // Ici on utilise un taux fictif de 78% pour simuler le net
+    // Adjuste ce pourcentage selon tes besoins
+    return (brut * 0.78).toFixed(2);
+  }
+
+  // Écouteur d'événement sur le bouton "Calculer"
+  calculerBtn.addEventListener('click', () => {
+    const brut = parseFloat(salaireBrutInput.value);
+    if (isNaN(brut) || brut < 0) {
+      salaireNetDisplay.textContent = "Veuillez entrer un montant valide.";
+    } else {
+      const net = calculerSalaireNet(brut);
+      salaireNetDisplay.textContent = net;
+    }
+  });
+</script>
+</body>
+</html>
